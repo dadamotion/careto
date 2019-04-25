@@ -1,0 +1,100 @@
+.full {
+    &-section {
+        @apply .flex .items-start .relative .w-full .overflow-hidden;
+
+        @media (min-width: 768px) {
+            @apply .items-center;
+        }
+
+        min-height: 600px;
+
+        &.vbc {
+            .full-content {
+                & > .service-text {
+                    @apply .bg-white;
+
+                    .service-category, .service-title, p {
+                        @apply .text-black;
+                    }
+
+                    .service-title {
+                        &::after {
+                            @apply .bg-black;
+                        }
+                    }
+                }
+
+                .button.light {
+                    @apply .text-black .border-black;
+                    background-image: url('../img/site-elements/arrow-black.svg');
+                }
+
+                .title-text {
+                    h2, h5 {
+                        @apply .font-bold .font-secondary .px-4 .text-4xl .tracking-wide .uppercase;
+                        min-height: 50px;
+
+                        &::after {
+                            @apply .hidden;
+                        }
+                    }
+                    h2 {
+                        @apply .bg-white .text-black;
+                    }
+
+                    h5 {
+                        @apply .bg-black .text-white;
+                    }
+                }
+
+                .title-top {
+
+                    h3, h6 {
+                        @apply .font-bold .font-secondary .text-4xl .tracking-wide .uppercase;
+                        min-height: 40px;
+                    }
+
+                    h6 {
+                        @apply .bg-black .text-white;
+                        &::after {
+                            display: none;
+                        }
+                    }
+
+                    h3 {
+                        @apply .bg-white .text-black;
+                    }
+                }
+            }
+        }
+    }
+
+    &-content {
+        @apply .flex .justify-center .mt-8 .w-full;
+
+        @media (min-width: 768px) {
+            @apply .items-center .mt-0;
+        }
+
+        &:hover {
+            .service-text {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                transition: visibility .3s ease,
+                            transform .3s ease,
+                            opacity .3s ease;
+            }
+            .title-text {
+                opacity: 0;
+                visibility: hidden;
+                transition: visibility .3s ease,
+                            opacity .3s ease;
+            }
+        }
+    }
+
+    &-image {
+        @apply .absolute .pin-t .pin-r .pin-b .pin-l .z-neg;
+    }
+}

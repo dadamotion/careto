@@ -1,0 +1,137 @@
+.modal {
+    @apply .hidden .fixed .text-white .overflow-y-auto .pin-t .pin-r .pin-b .pin-l .z-2000;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    outline: 0;
+    background-color: rgba(0,0,0,.5);
+
+    // needs to be applied on the body
+
+    &-open {
+        overflow: hidden;
+    }
+
+    &-close {
+        @apply .absolute .pin-t .pin-r .inline-block .overflow-hidden;
+        width: 50px;
+        height: 50px;
+        transition: background-color .3s ease;
+
+        &:hover {
+            @apply .bg-black-dark;
+
+            &::before, &::after {
+                @apply .bg-white;
+            }
+        }
+
+        &::before, &::after {
+            content: '';
+            @apply .absolute .bg-black-dark .w-1/2;
+            height: 1px;
+            top: 50%;
+            left: 25%;
+            margin-top: -1px;
+            transition: background-color .3s ease;
+        }
+
+        &::before {
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform: rotate(-45deg);
+        }
+
+    }
+
+
+    &.is-open {
+        @apply .block;
+    }
+
+    &.fade {
+        opacity: 0;
+        transition: opacity .3s linear;
+
+        .modal-dialog {
+            @apply .mx-3 .relative;
+            width: auto;
+            transition: transform .3s ease-out;
+
+            @media (min-width: 768px) {
+                @apply .my-8 .mx-auto;
+                width: 600px;
+            }
+
+            @media (min-width: 992px) {
+                width: 900px;
+            }
+        }
+
+        &.in {
+            opacity: 1;
+
+            .modal-dialog {
+                transform: translate3d(0,0,0);
+            }
+
+        }
+    }
+
+    &-content {
+        @apply .bg-white .border .border-solid .relative;
+        background-clip: padding-box;
+        border-color: rgba(0,0,0,.2);
+        border-radius: 3px;
+        box-shadow: 0 5px 15px rgba(0,0,0,.5);
+        outline: 0;
+    }
+
+    &-brand-color {
+        padding-top: 65px;
+        padding-bottom: 50px;
+
+        @media (min-width: 768px) {
+            padding-top: 130px;
+            padding-bottom: 100px;
+        }
+
+        @apply .bg-black;
+    }
+
+    .mail-icon {
+        svg {
+            @apply .block .mb-8 .mr-0;
+            width: 70px;
+            height: 70px;
+            opacity: .5;
+
+            @media (min-width: 992px) {
+                @apply .mt-4 .mr-8 .mb-8;
+                width: 110px;
+                height: 110px;
+            }
+        }
+    }
+
+    .lead {
+        @apply .text-white .text-base  .tracking-wide;
+
+        @media (min-width: 768px) {
+            @apply .text-lg;
+        }
+    }
+
+    .form-field {
+        @apply .mt-4 .tracking-wide;
+
+        [type="email"] {
+            @apply .text-base;
+        }
+    }
+
+    .button-wrap {
+        @apply .mt-4 .mr-0 .pt-0;
+    }
+}

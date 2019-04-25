@@ -1,0 +1,56 @@
+# Craft 3 .gitignore
+#
+# Example .gitignore file for Craft 3 CMS projects
+#
+# @author    DADA
+# @copyright Copyright (c) 2018 dadamotion
+# @link      https://dadamotion.be/
+# @package   dadamotion/craftcms
+# @since     1.0.0
+# @license   MIT
+
+# CRAFT ENVIRONMENT
+.env.sh
+.env
+production.env.sh
+
+# COMPOSER
+/vendor
+
+# CRAFT STORAGE
+/storage/*
+!/storage/.gitkeep
+
+# SCRIPTS
+scripts
+
+# BUILD FILES
+/bower_components/*
+/node_modules/*
+/web/dist/*
+/web/assets/img/uploads/*
+/web/assets/uploads/*
+/web/transcoder/*
+!/web/dist/.gitkeep
+/yarn-error.log
+/npm-debug.log
+/web/cpresources/*
+
+# MISC FILES
+.cache
+.DS_Store
+.idea
+.project
+.settings
+*.esproj
+*.sublime-workspace
+*.sublime-project
+*.tmproj
+*.tmproject
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+config.codekit3
+prepros-6.config

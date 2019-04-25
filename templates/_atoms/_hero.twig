@@ -1,0 +1,119 @@
+{% switch block.textColor %}
+  {% case "black" %}
+    {% set fontClasses = "text-black" %}
+    {% set buttonClasses = "bg-transparent text-black hover:text-white hover:bg-black border-black" %}
+  {% case "white" %}
+    {% set fontClasses = "text-white" %}
+    {% set buttonClasses = "bg-transparent text-white hover:text-black hover:bg-white border-white" %}
+{% endswitch %}
+
+{% switch block.position %}
+  {% case "left" %}
+    {% if block.orientation == "vertical" %}
+      {% set positionClasses = "flex-col justify-start md:items-start text-left" %}
+    {% else %}
+      {% set positionClasses = "flex-row items-end md:justify-start text-left" %}
+      {% set buttonClasses = buttonClasses ~ " ml-16" %}
+    {% endif %}
+  {% case "center" %}
+    {% if block.orientation == "vertical" %}
+      {% set positionClasses = "flex-col justify-start md:items-center text-center" %}
+    {% else %}
+      {% set positionClasses = "flex-row items-end md:justify-center text-center" %}
+      {% set buttonClasses = buttonClasses ~ " ml-16" %}
+    {% endif %}
+  {% case "right" %}
+    {% if block.orientation == "vertical" %}
+      {% set positionClasses = "flex-col justify-start md:items-end text-center lg:text-right" %}
+    {% else %}
+      {% set positionClasses = "flex-row items-end md:justify-end text-center lg:text-right" %}
+      {% set buttonClasses = buttonClasses ~ " ml-16" %}
+    {% endif %}
+{% endswitch %}
+
+{%- minify -%}
+<div class="relative h-screen w-screen {% if loop.first %}mb-{{ block.spacing }}{% else %}my-{{ block.spacing }}{% endif %}">
+
+  {% if (block.backgroundImage|length and not block.backgroundVideo|length) %}
+
+    {% set image = block.backgroundImage[0] %}
+
+    {% if image %}
+
+      <div class="absolute z-neg h-full w-full">
+
+        {% set optimizedImage = block.backgroundImage[0].optimizedHero %}
+
+        <picture class="block h-full w-full">
+          <img  src="{{ optimizedImage.src() }}"
+                data-srcset="{{ optimizedImage.srcset() }}"
+                data-sizes="100vw"
+                alt="{{ block.backgroundImage[0].title }}" 
+                class="object-cover h-full w-full" />
+        </picture>
+
+      </div>
+
+    {% endif %}
+
+  {% endif %}
+
+  {% if block.backgroundVideo|length %}
+    <div class="e-video--background lg">
+      <video class="e-video--cover" id="dada-player-{{- loop.index -}}" preload="auto" autoplay loop muted playsinline>
+        <source
+          src="{{ block.backgroundVideo[0].url }}"
+          type="video/mp4">
+      </video>
+    </div>
+  {% endif %}
+
+  {% if block.backgroundVideoTablet|length %}
+    <div class="e-video--background md">
+      <video class="e-video--cover" id="dada-player-{{- loop.index -}}" preload="auto" autoplay loop muted playsinline>
+        <source
+          src="{{ block.backgroundVideoMobile[0].url }}"
+          type="video/mp4">
+      </video>
+    </div>
+  {% endif %}
+
+  {% if block.backgroundVideoMobile|length %}
+    <div class="e-video--background sm">
+      <video class="e-video--cover" id="dada-player-{{- loop.index -}}" preload="auto" autoplay loop muted playsinline>
+        <source
+          src="{{ block.backgroundVideoMobile[0].url }}"
+          type="video/mp4">
+      </video>
+    </div>
+  {% endif %}
+
+  <div class="container mx-auto h-full py-{{ block.offset }}">
+
+    <div class="flex h-full {{ positionClasses }}">
+      {% if loop.first %}
+        <h1 class="font-secondary text-3xl md:text-5xl lg:text-{{ block.headingSize }} {{ fontClasses }} lg:w-3/5 mb-8">{{ block.heading }}</h1>
+      {% else %}
+        <h2 class="font-secondary text-3xl md:text-5xl lg:text-{{ block.headingSize }} {{ fontClasses }} lg:w-3/5 mb-8">{{ block.heading }}</h2>
+      {% endif %}
+
+      <div class="a-typography inherit font-light text-base md:text-{{ block.fontSize }} {{ fontClasses }} lg:w-3/5">
+        {{ block.description }}
+      </div>
+
+      {% if block.button|length %}
+        <a  class="bg-transparent border font-bold font-primary inline-block mt-8 px-8 py-4 no-underline tracking-wider uppercase {{ buttonClasses }}"
+            href="{{ block.button.getUrl() }}">
+          
+          <span>
+            {{- block.button.getText() -}}
+          </span>
+        </a>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+</div>
+{%- endminify -%}

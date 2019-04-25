@@ -1,0 +1,29 @@
+.categories {
+    &-wrapper {
+        @apply .flex .flex-col .mb-8;
+
+        @media (min-width: 768px) {
+            @apply .flex-row .flex-no-wrap .items-center .mb-0;
+        }
+    }
+
+    &-description {
+        @apply .font-primary .mb-4 .text-grey .text-sm .tracking-normal .uppercase;
+
+        @media (min-width: 768px) {
+            @apply .mb-0;
+        }
+    }
+
+    &-item {
+        @apply .ml-0 .my-1;
+
+        @media (min-width: 768px) {
+            @apply .ml-8;
+        }
+    }
+
+    &-link {
+        @apply .font-primary .no-underline .text-sm .text-white .tracking-wide;
+    }
+}

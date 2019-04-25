@@ -1,0 +1,44 @@
+.e-video {
+    &--background {
+        @apply absolute pin-t .pin-l w-screen h-screen z-neg;
+
+        .plyr {
+            video {
+                @apply w-screen h-screen;
+                object-fit: cover;
+                pointer-events: none;
+            }
+        }
+
+        & > video {
+            
+        }
+
+        &.sm {
+            @screen md {
+                @apply hidden;
+            }
+        }
+
+        &.md {
+            @apply hidden;
+
+            @screen md {
+                @apply block;
+            }
+
+            @screen lg {
+                @apply hidden;
+            }
+            
+        }
+
+        &.lg {
+            @apply hidden;
+
+            @screen lg {
+                @apply block;
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.articles {
+
+    &-section {
+        @apply .relative .pt-8;
+    }
+
+    &-wrap {
+        @apply .flex .flex-wrap .mx-auto .w-full;
+        max-width: 1200px;
+    }
+
+}
+
+.article {
+    @apply .flex .flex-col .mb-8 .px-4;
+
+    & > .media {
+        @apply .mb-8;
+        max-height: 336px;
+    }
+
+    .button-wrap {
+        @apply .pt-8 .mt-auto;
+
+        @media (min-width: 768px) {
+            @apply .mr-0 .ml-auto;
+        }
+
+    }
+}

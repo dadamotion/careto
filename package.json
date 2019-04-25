@@ -1,0 +1,172 @@
+{
+    "name": "dada",
+    "version": "2.0.2",
+    "description": "Website for dadamotion.be",
+    "main": "gulpfile.js",
+    "author": "Michael Thomas, DADA <michael@dadamotion.be>",
+    "copyright": "DADA",
+    "license": "UNLICENSED",
+    "private": true,
+    "paths": {
+        "src": {
+            "base": "./src/",
+            "fonts": "./src/fonts/",
+            "img": "./src/img/",
+            "js": "./src/js/",
+            "scss": "./src/scss/"
+        },
+        "dist": {
+            "base": "./web/",
+            "css": "./web/assets/css/",
+            "fonts": "./web/assets/fonts/",
+            "img": "./web/img/",
+            "js": "./web/assets/js/"
+        },
+        "favicon": {
+            "src": "./src/img/favicon_src.png",
+            "dest": "./web/icons/"
+        },
+        "tailwindcss": {
+            "src": "./src/scss/site.scss",
+            "conf": "./tailwind.js"
+        },
+        "craftConfig": "./config/",
+        "templates": "./templates/",
+        "inlineJs": "./templates/_inlinejs/"
+    },
+    "urls": {
+        "live": "https://dadamotion.be/",
+        "local": "https://dadamotion.dev/",
+        "staging": "https://staging.dadamotion.be",
+        "critical": "https://staging.dadamotion.be/"
+    },
+    "vars": {
+        "siteCssName": "site.combined.min.css",
+        "scssName": "site.scss",
+        "cssName": "site.css"
+    },
+    "globs": {
+        "img": [
+            "./web/assets/img/"
+        ],
+        "fonts": [
+            "./src/fonts/*.{eot,ttf,woff,woff2}"
+        ],
+        "critical": [
+            {
+                "url": "",
+                "template": "index"
+            },
+            {
+                "url": "offline",
+                "template": "offline"
+            },
+            {
+                "url": "error",
+                "template": "error"
+            },
+            {
+                "url": "503",
+                "template": "503"
+            },
+            {
+                "url": "404",
+                "template": "404"
+            }
+        ],
+        "criticalWhitelist": [],
+        "download": [
+            {
+                "url": "https://www.google-analytics.com/analytics.js",
+                "dest": "./web/js/"
+            },
+            {
+                "url": "https://www.googletagmanager.com/gtm.js",
+                "dest": "./web/js/"
+            }
+        ],
+        "distJs": [
+            "./build/js/*.js",
+            "./node_modules/lazysizes/lazysizes.min.js",
+            "./node_modules/lazysizes/plugins/bgset/ls.bgset.min.js",
+            "./node_modules/picturefill/dist/picturefill.min.js"
+        ],
+        "babelJs": [
+            "./src/js/*.js"
+        ],
+        "inlineJs": [
+            "./node_modules/fg-loadcss/src/loadCSS.js",
+            "./node_modules/fg-loadcss/src/cssrelpreload.js",
+            "./node_modules/loadjs/dist/loadjs.min.js",
+            "./node_modules/tiny-cookie/tiny-cookie.min.js",
+            "./src/js/tab-handler.js",
+            "./src/js/register-service-worker.js"
+        ],
+        "siteIcon": "./web/icons/favicon.*"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome": "^1.1.5",
+        "@fortawesome/fontawesome-free-brands": "^5.0.10",
+        "@fortawesome/fontawesome-pro-light": "^5.0.10",
+        "@fortawesome/fontawesome-pro-regular": "^5.0.10",
+        "@fortawesome/fontawesome-pro-solid": "^5.0.10",
+        "@fortawesome/vue-fontawesome": "^0.0.22",
+        "axios": "^0.17.1",
+        "fg-loadcss": "^1.2.0",
+        "fontfaceobserver": "^2.0.5",
+        "gsap": "^2.0.2",
+        "ks-vue-scrollmagic": "^1.0.2",
+        "lazysizes": "^2.0.6",
+        "loadjs": "^3.3.1",
+        "picturefill": "^3.0.2",
+        "plyr": "^3.4.6",
+        "tailwindcss-flexbox-order": "^1.0.0",
+        "tailwindcss-object-fit": "^1.0.1",
+        "tiny-cookie": "^1.0.1",
+        "vue": "^2.5.9",
+        "vue-fullpage.js": "^0.0.7"
+    },
+    "devDependencies": {
+        "babel-preset-env": "^1.6.1",
+        "copy": "^0.3.1",
+        "critical": "^1.2.2",
+        "cross-env": "^5.1.3",
+        "eslint": "^4.19.1",
+        "eslint-config-spatie": "^2.0.3",
+        "eslint-loader": "^2.0.0",
+        "git-rev-sync": "^1.11.1",
+        "html-critical-webpack-plugin": "^1.1.0",
+        "laravel-mix": "^2.1.11",
+        "laravel-mix-banner": "^0.1.0",
+        "laravel-mix-criticalcss": "^0.1.2",
+        "laravel-mix-dload": "^0.1.4",
+        "laravel-mix-eslint": "^0.1.1",
+        "laravel-mix-purgecss": "^2.0.0",
+        "laravel-mix-tailwind": "^0.1.0",
+        "moment": "^2.22.1",
+        "postcss-object-fit-images": "^1.1.2",
+        "purgecss-webpack-plugin": "^0.20.0",
+        "tailwindcss": "^0.5.2",
+        "tiny-cookie": "^2.1.1",
+        "webpack": "^3.10.0"
+    },
+    "eslintConfig": {
+        "extends": "spatie"
+    },
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "hot": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production webpack --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dadamotion/craft"
+    },
+    "bugs": {
+        "url": "https://github.com/dadamotion/craft/issues",
+        "email": "development@dadamotion.be"
+    }
+}

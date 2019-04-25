@@ -1,0 +1,13 @@
+.row {
+    &.error, &.success {
+        @apply .mb-8 .p-4;
+    }
+
+    &.success {
+        @apply .bg-success .text-success-dark;
+    }
+
+    &.error {
+        @apply .bg-error .text-error-dark;
+    }
+}

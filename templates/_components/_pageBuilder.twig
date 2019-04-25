@@ -1,0 +1,100 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+ # Pagebuilder include template
+ # -----------------------------
+ #
+ # This template is used to output HTML for the main content Matrix field.
+ #
+ # An `entry` variable is expected to be defined.
+-#}
+
+{% set prevType = null %}
+{% set prevPosition = null %}
+{% set nextType = null %}
+{% set nextPosition = null %}
+{% set closedLastRow = true %}
+{% set blocks = entry.pageBuilder.with([
+    'image:image',
+    'gallery:images',
+    'hero:backgroundImage',
+    'hero:backgroundVideo',
+]).all() %}
+
+{% macro getPosition(block) %}
+    {%- spaceless %}
+        {% set positionedTypes = ['text', 'image', 'gallery'] %}
+        {% set fullTypes = ['quote', 'hero', 'eyecatcher', 'services'] %}
+        {{ (block.type.handle in positionedTypes and block.position ? block.position : (block.type.handle in fullTypes ? 'full' : 'center') ) }}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% from _self import getPosition %}
+
+{% set fullTypes = ['quote', 'hero', 'eyecatcher', 'services'] %}
+
+{%- minify -%}
+{% for i, block in blocks %}
+
+    {# If there's no next type, we're on the first type #}
+    {% set type = (nextType ?: block.type) %}
+
+    {# Get the position for this block (left, center, right, full) #}
+    {% set position = (nextPosition ?: getPosition(block)~'') %}
+
+    {# Get the next blockType #}
+    {% set nextType = (not loop.last ? blocks[i+1].type.handle) %}
+
+    {# Get the next position #}
+    {% set nextPosition = (not loop.last ? getPosition(blocks[i+1])~'') %}
+
+    {# Are we starting a new row? #}
+    {%- minify -%}
+    {% if (block.type.handle in fullTypes) %}
+        <div class="md:flex">
+    {% elseif closedLastRow %}
+        <div class="container mx-auto px-4">
+          <div class="md:flex md:flex-wrap md:justify-start -mx-4 w-full">
+    {% endif %}
+    {%- endminify -%}
+   
+    {# Open our block #}
+    {%- minify -%}
+    <div class="{%- if block.width and block.width != 'full' -%}md:w-{{ block.width }}{%- endif %}
+                {%- if (block.type.handle in fullTypes and loop.index0 != 0) -%} 
+                  my-{{ block.spacing -}}
+                {%- elseif (block.type.handle in fullTypes and loop.index0 == 0) -%} 
+                  m-0
+                {%- else %} 
+                  px-4 mb-{{ block.spacing }} 
+                {%- endif %} w-full">
+    {%- endminify -%}
+
+    {# Load our component #}
+    {% include '_atoms/_' ~ type %}
+
+    {%- minify -%}
+    {# Close the column #}
+    </div>
+    {%- endminify -%}
+
+    
+    {%- minify -%}
+    {# Are we closing this row? #}
+    {% if (nextPosition != 'full' or nextType not in fullTypes) %}
+        {% if (position == 'full' or block.type.handle in fullTypes) %}
+            </div>
+          {% set closedLastRow = true %}
+        {% else %}
+          {% set closedLastRow = false %}
+        {% endif %}
+    {% else %}
+        </div>
+      </div>
+      {% set closedLastRow = true %}
+    {% endif %}
+    {%- endminify -%}
+
+    {% set prevType = type %}
+    {% set prevPosition = position %}
+{% endfor %}
+{%- endminify -%}

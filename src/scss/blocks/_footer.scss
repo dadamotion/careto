@@ -1,0 +1,188 @@
+.footer {
+    &-section {
+        @apply .pt-8 .bg-black;
+    }
+
+    &-top {
+        @apply .pb-8 .relative;
+
+        &::after {
+            @apply .absolute .pin-l .pin-b .w-full .bg-white;
+            content: '';
+            height: 1px;
+            opacity: .2;
+        }
+    }
+
+    &-link-wrap {
+        @apply .flex .justify-center .items-center;
+    }
+
+    &-link {
+        @apply .flex .flex-col .font-secondary .mb-8 .no-underline .text-base .text-white;
+        letter-spacing: 1px;
+
+        @media (min-width: 768px) {
+
+            &::after {
+                @apply .block .my-4 .bg-white;
+                content: '';
+                opacity: .2;
+                width: 24px;
+                height: 1px;
+                transition: opacity .3s ease;
+            }
+
+        }
+
+        &:hover {
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+
+    &-links-wrapper {
+        @apply .flex  .flex-col .w-full;
+
+        @media (min-width: 768px) {
+            @apply .flex-row .flex-no-wrap;
+        }
+
+        &::before, &::after {
+            @apply .absolute;
+            content: '';
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -50px;
+            width: 100px;
+            height: 100px;
+        }
+
+        &::before {
+            @apply .bg-black .z-10;
+        }
+
+        &::after {
+            @apply .z-20;
+            background-image: url('../img/site-elements/pixville-detail.svg');
+            background-repeat: no-repeat;
+            background-size: 42px;
+            background-position: center center;
+        }
+    }
+
+    &-contact {
+        @apply .mt-8 .mx-8;
+
+        @media (min-width: 768px) {
+            @apply .mt-0 .mx-auto;
+            max-width: 400px;
+        }
+
+        .button-wrap {
+            max-width: 100%;
+        }
+
+        &-info {
+
+            @apply .flex .flex-col .flex-no-wrap;
+
+            @media (min-width: 768px) {
+                @apply .flex-no-wrap .flex-row;
+            }
+
+            div {
+                @apply .flex .flex-col .flex-no-wrap .items-start .py-4;
+
+                &:first-child {
+                    @apply .pt-8;
+                }
+
+                @media (min-width: 768px) {
+                    @apply .py-8;
+
+                    &:last-child {
+                        @apply .items-end;
+                    }
+                }
+
+                span {
+                    @apply .block .font-secondary .leading-normal .mb-2 .text-sm .text-white .uppercase;
+                    opacity: .3;
+                    letter-spacing: 2px;
+
+                    &:nth-child(2n) {
+                        @apply .mt-2;
+                    }
+                }
+
+                a {
+                    @apply .font-primary .leading-normal .lowercase .no-underline .text-sm .text-white;
+                }
+
+            }
+
+        }
+    }
+
+    &-bottom {
+        @apply .bg-black .flex .flex-col .items-center .mt-8;
+
+        @media (min-width: 768px) {
+            @apply .flex-no-wrap .flex-row .justify-between .px-8 .py-8;
+        }
+    }
+
+    &-copyright {
+        @apply .flex .flex-no-wrap .items-center .my-8;
+        order: 2;
+
+        @media (min-width: 768px) {
+            @apply .my-0;
+            order: 1;
+        }
+    }
+
+    &-icon {
+        @apply .flex .items-center;
+    }
+
+    &-text {
+        @apply .ml-4;
+
+        p {
+            @apply .text-white .leading-normal;
+        }
+    }
+
+    &-madeby {
+        @apply .mt-8;
+        order: 1;
+
+        @media (min-width: 768px) {
+            @apply .mt-0;
+            order: 2;
+        }
+
+        p {
+            @apply .flex .items-center .text-white;
+        }
+
+        a {
+            @apply .no-underline .text-black .uppercase;
+            margin-left: 4px;
+        }
+    }
+}
+
+.dada-heart {
+    @apply .inline-flex;
+    width: 20px;
+    height: 17px;
+    margin: 0 2px;
+    background-image: url(../img/site-elements/madewithlovebydada.svg);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center center;
+}

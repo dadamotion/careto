@@ -1,0 +1,30 @@
+.label {
+    display: none;
+}
+
+.form {
+
+    &-field {
+        @apply .w-full .mb-2;
+    }
+}
+
+[type="text"],
+[type="email"],
+textarea {
+    @apply bg-grey-lightest text-base border-0 font-primary mr-0 px-8 py-3 text-xs w-full;
+    line-height: 34px;
+    height: 58px;
+    outline: none;
+
+    @media (min-width: 768px) {
+        @apply .mr-4;
+    }
+
+}
+
+textarea {
+    @apply .mr-0;
+    height: 126px;
+    resize: none;
+}

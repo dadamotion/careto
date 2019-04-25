@@ -1,0 +1,13 @@
+.e-share-icons {
+    $e: &;
+
+    &--link {
+        @apply font-bold inline-block mr-2 no-underline text-white;
+    }
+
+    &__black {
+        #{$e}--link {
+            @apply text-black;
+        }
+    }
+}

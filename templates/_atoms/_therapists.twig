@@ -1,0 +1,41 @@
+{%- minify -%}
+<div class="md:flex md:flex-wrap w-full -mx-8">
+  {% for row in block.therapists.all() %}
+
+  <div class="w-full md:w-1/2 px-8">
+
+    <div class="rounded overflow-hidden shadow-lg text-black h-full w-full">
+      {% set optimizedImage = row.therapistPhoto.one().optimizedOverview %}
+
+      <picture class="block w-full">
+        <img  src="{{ optimizedImage.src() }}"
+              data-srcset="{{ optimizedImage.srcset() }}"
+              data-sizes="100vw"
+              alt="{{ row.therapistName }}" />
+      </picture>
+      <div class="a-typography px-6 py-4">
+        <h4 class="font-bold text-black text-xl mb-2">{{ row.therapistName }}</h4>
+        
+        {{ row.therapistDescription }}
+
+      </div>   
+
+      <div class="-mt-8 px-6 py-4">
+        <h5 class="font-bold font-primary mb-4 text-black text-base tracking-wide uppercase">{{"Functie"|t}}</h5>
+        {% for function in row.functions.all() %}
+        <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mb-2 mr-2 lowercase"> {{ function.title }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="px-6 py-4">
+        <h5 class="font-bold font-primary mb-4 text-black text-base tracking-wide uppercase">{{"Specialisatie"|t}}</h5>
+        {% for specialty in row.specialties.all() %}
+        <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mb-2 mr-2 lowercase"> {{ specialty.title }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+  {% endfor %}
+</div>
+{%- endminify -%}

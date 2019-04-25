@@ -1,0 +1,88 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * gcal plugin for Craft CMS 3.x
+ *
+ * gcal Settings.twig
+ *
+ * @author    Michael Thomas
+ * @copyright Copyright (c) 2019 Michael Thomas
+ * @link      michtio.dev
+ * @package   Gcal
+ * @since     1.0.0
+ */
+#}
+{% extends "_layouts/cp" %}
+
+{% set title = "Calendar"|t('gcal')%}
+
+{% import "_includes/forms" as forms %}
+
+{% set content %}
+
+    <h2 class="first">{{ 'Google Account'|t('gcal') }}</h2>
+
+    {% if not oauthAccount or info.forceConnect %}
+
+        {% if isOauthProviderConfigured %}
+            <p>{{ 'Gettings errors trying to connect? Check your {link}.'|t('gcal', { link: '<a href="'~url('gcal/settings/oauth')~'">OAuth settings</a>' })|raw }}</p>
+
+            {% if errors is defined and errors|length > 0 %}
+                <ul class="error">
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <p><a class="btn submit" href="{{ actionUrl('gcal/oauth/connect') }}">{{"Connect"|t('gcal') }}</a></p>
+        {% else %}
+            <p>{{ 'To get started, go to the OAuth settings and configure your Google application’s client ID & secret.'|t('gcal') }}</p>
+            <p><a class="btn" href="{{ url('gcal/settings/oauth') }}">{{"OAuth Settings"|t('gcal') }}</a></p>
+        {% endif %}
+    {% else %}
+
+        <p>{{ 'You are authenticated to Google with the following account'|t('gcal') }} :</p>
+
+        <div class="oauth-account">
+            <div class="account-box">
+                <div class="image">
+                    <img src="{{ googleIconUrl }}" height="30" alt="Google OAuth provider">
+                </div>
+                <div class="details">
+                    <ul>
+                        <li>{{ oauthAccount.name }}</li>
+
+                        {% if oauthAccount.email is defined and not oauthAccount.email is empty %}
+                            <li class="light">{{ oauthAccount.email }}</li>
+                        {% elseif oauthAccount.uid is defined %}
+                            <li class="light">{{ oauthAccount.uid }}</li>
+                        {% elseif oauthAccount.id is defined %}
+                            <li class="light">{{ oauthAccount.id }}</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="buttons">
+                    <a class="icon delete" href="{{ actionUrl('gcal/oauth/disconnect') }}"></a>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <form method="post" accept-charset="UTF-8" data-saveshortcut>
+
+            {{ csrfInput() }}
+
+            <input type="hidden" name="action" value="gcal/settings/save-settings">
+            <input type="hidden" name="pluginHandle" value="gcal">
+            <input type="hidden" name="redirect" value="{{ 'gcal/settings'|hash }}">
+
+            <div class="buttons">
+                <input type="submit" class="btn submit force" value="{{ 'Save'|t('gcal') }}">
+            </div>
+        </form>
+    {% endif %}
+
+{% endset %}

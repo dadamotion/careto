@@ -1,0 +1,46 @@
+span {
+    &.hover-effect {
+        @apply inline-block leading-none;
+
+        &::after {
+            @apply block border-b border-white;
+            content: '';
+            margin-top: 1px;
+            border-bottom-width: 2px; 
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+        }
+
+        &:hover {
+            &::after {
+                transform: scaleX(1);
+            }
+        }
+    }
+}
+
+.scroll-indicator {
+    @apply inline-block fixed font-bold font-primary pin-b text-base text-white;
+
+    // TODO: add to tailwind props
+    min-height: 60px;
+    width: 50px;
+    left: 50%;
+
+    .side-text-position {
+        @apply absolute bg-black h-full pin-l pin-t w-2px;
+    }
+
+    .side-text {
+        @apply absolute bg-white h-full pin-l pin-t w-2px;
+    }
+
+    em {
+        @apply absolute inline-block pin-l roman;
+        top: 12px;
+        transform: rotate(-90deg);
+        transform-origin: center center;
+
+    }
+}

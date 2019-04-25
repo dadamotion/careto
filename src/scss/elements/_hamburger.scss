@@ -1,0 +1,39 @@
+.e-hamburger {
+    $e: &;
+
+    &--menu {
+        @apply fixed flex items-center;
+        left: 16.66667%;
+        top: 6.66667%;
+        cursor: pointer;
+        height: 21px;
+
+        span {
+            @apply inline-flex font-primary text-sm text-white uppercase;
+            letter-spacing: 4px;
+        }
+    }
+
+    &--icon {
+        @apply flex flex-col justify-between ml-4;
+        width: 22px;
+        height: 14px;
+
+        span {
+            @apply block bg-white;
+            height: 2px;
+
+            &:nth-child(1) {
+                width: 22px;
+            }
+
+            &:nth-child(2) {
+                width: 14px;
+            }
+
+            &:nth-child(3) {
+                width: 18px;
+            }
+        }
+    }
+}

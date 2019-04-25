@@ -1,0 +1,16 @@
+.e-logo {
+  @apply fixed flex justify-center items-center;
+
+  top: 6.66667%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 335;
+  transition: left 200ms ease-in-out;
+  width: 150px;
+  height: 50px;
+
+  &--svg {
+    @apply .w-full;
+  }
+
+}

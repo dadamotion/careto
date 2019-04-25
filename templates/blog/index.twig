@@ -1,0 +1,147 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{% extends "_layouts/_layout.twig" %}
+
+{% block inline_css %}
+        {{ source ("index_critical.min.css", ignore_missing = true) }}
+{% endblock %}
+
+{% block content %}
+
+    <section class="flex justify-end items-end pb-24 h-80 bg-black">
+
+        {% set categories = craft.categories({
+            with: ['url, title']
+        }).group('blog').all() %}
+
+        {% set latestEntry = craft.entries({
+            section: 'blog',
+            with: ['teaserImage'],
+            limit: 1,
+        }).one() %}
+
+        {% set entries = craft.entries({
+            section: 'blog',
+            with: ['teaserImage'],
+            offset: 1,
+        }).all() %}
+
+        <div class="container mx-auto flex flex-grow flex-no-wrap">
+
+          <h1 class="font-primary text-base tracking-wider uppercase">
+            Blogberichten
+          </h1>
+
+          <div class="flex flex-no-wrap ml-auto">
+            <span class="inline-block font-primary pr-8 text-grey-light text-sm tracking-wider uppercase">
+              Categorieën
+            </span>
+            <span class="inline-block font-primary pr-8 text-sm tracking-wider uppercase">
+              <a href="{{ url('blog') }}" class="text-white hover:text-red no-underline" @mouseover="prerenderLink">Alle</a>
+            </span>
+            {% for category in categories %}
+              <span class="inline-block font-primary pr-8 text-sm tracking-wider uppercase">
+                <a href="{{ category.url }}" class="text-white hover:text-red no-underline" @mouseover="prerenderLink">{{ category.title }}</a>
+              </span>
+            {% endfor %}
+          </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+      <div class="block relative max-h-mainentry overflow-hidden">
+
+        {% if latestEntry.teaserImage is not empty %}
+          <a href="{{ latestEntry.url }}" title="{{ latestEntry.title }}" class="no-underline">
+            <picture class="block w-full">
+
+              {% set optimizedImages = latestEntry.teaserImage[0].optimizedOverview %}
+
+                <img  src="{{ optimizedImages.src() }}"
+                      data-srcset="{{ optimizedImages.srcset() }}"
+                      data-sizes="100vw"
+                      alt="{{ latestEntry.teaserImage[0].title }}"
+                      class="block object-cover w-full" />
+
+            </picture>
+          </a>
+
+          <div class="absolute bg-black pin-b pin-l py-6 pl-40 pr-20 w-3/5 min-h-mainentry">
+            <div class="md:flex md:flex-no-wrap md:justify-between mb-6">
+              <span class="block text-grey uppercase text-xs tracking-wider mb-4">
+                {{ latestEntry.blogCategories.one() }}
+              </span>
+              <span class="font-thin inline-block text-white text-xs ml-auto">
+                {{ latestEntry.postDate|date("d F Y") }}
+              </span>
+            </div>
+
+            <h2 class="font-primary text-3xl mb-8">
+              <a href="{{ latestEntry.url }}" class="text-white hover:text-red no-underline">
+                {{ latestEntry.title }}
+              </a>
+            </h2>
+          </div>
+        {% endif %} 
+
+      </div>
+
+      <div class="container mx-auto">
+
+        <div class="flex flex-wrap -mx-4">
+
+          {% for entry in entries %}
+
+            <div class="mb-8 px-4 w-full md:w-1/2">
+
+              <div class="overflow-hidden">
+                {% if entry.teaserImage is not empty %}
+                  <a href="{{ entry.url }}" title="{{ entry.title }}" class="no-underline">
+                    <picture class="block">
+
+                      {% set optimizedImages = entry.teaserImage[0].optimizedOverview %}
+
+                      <img  src="{{ optimizedImages.src() }}"
+                            data-srcset="{{ optimizedImages.srcset() }}"
+                            data-sizes="100vw"
+                            alt="{{ entry.teaserImage[0].title }}"
+                            class="block" />
+
+                    </picture>
+                  </a>
+                {% endif %}        
+              </div>
+
+              <div class="bg-black flex flex-col overflow-hidden py-6 px-10">
+
+                <span class="block text-grey uppercase text-xs tracking-wider mb-4">
+                  {{ entry.blogCategories.one() }}
+                </span>
+
+                <h3 class="font-primary text-xl mb-8">
+                  <a href="{{ entry.url }}" class="text-white hover:text-red no-underline">
+                    {{ entry.title }}
+                  </a>
+                </h3>
+
+                <span class="font-thin inline-block text-white text-xs ml-auto">
+                  {{ entry.postDate|date("d F Y") }}
+                </span>
+
+              </div>
+
+            </div>
+
+          {% endfor %}
+        
+        </div>
+
+      </div>
+
+    </section>
+
+{% endblock %}
+{% block inline_js %}
+{% endblock %}

@@ -1,0 +1,33 @@
+.a-hamburger {
+  $e: &;
+
+  @apply flex flex-no-wrap items-center h-full;
+  cursor: pointer;
+
+  &--label {
+    @apply font-primary text-base font-normal inline-block mr-4 uppercase;
+  }
+
+  &--icon {
+      @apply flex flex-col justify-between;
+      width: 22px;
+      height: 14px;
+
+      span {
+          @apply block bg-white;
+          height: 2px;
+
+          &:nth-child(1) {
+              width: 22px;
+          }
+
+          &:nth-child(2) {
+              width: 14px;
+          }
+
+          &:nth-child(3) {
+              width: 18px;
+          }
+      }
+  }
+}

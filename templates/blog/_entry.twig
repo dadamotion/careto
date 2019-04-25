@@ -1,0 +1,14 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{% extends "_layouts/_layout.twig" %}
+
+{% block inline_css %}
+        {{ source ("index_critical.min.css", ignore_missing = true) }}
+{% endblock %}
+
+{% block content %}
+
+    {% include '_components/_pageBuilder' %}
+
+{% endblock %}
+{% block inline_js %}
+{% endblock %}

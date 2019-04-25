@@ -1,0 +1,187 @@
+h1, h2, h3 {
+    @apply .font-secondary .font-light .leading-normal .text-5xl .text-white .uppercase;
+}
+
+h1 {
+    @apply .text-3xl .tracking-wide;
+
+    @media (min-width: 768px) {
+        @apply .text-5xl .tracking-wide;
+    }
+}
+
+h2 {
+    @apply .text-3xl .tracking-wide;
+
+    @media (min-width: 768px) {
+        @apply .text-4xl .tracking-wide;
+    }
+}
+
+h3 {
+    @apply .text-3xl .tracking-wide;
+}
+
+h4, h5, h6 {
+    @apply .font-primary .font-normal .leading-normal .text-lg .text-white;
+}
+
+h4 {
+    @apply .text-2xl;
+}
+
+h5 {
+    @apply .text-xl;
+}
+
+h6 {
+    @apply .text-lg;
+}
+
+.title {
+    &-text, &-top, &-content {
+
+
+        h1, h2, h3, h4, h5, h6 {
+            @apply .text-center;
+        }
+
+    }
+
+    &-text {
+        @apply .px-4;
+
+        @media (min-width: 768px) {
+            @apply .px-0 .py-200;
+        }
+
+        opacity: 1;
+        visibility: visible;
+        transition: opacity .3s ease,
+                    visibility .3s ease;
+
+        h5 {
+            &::after {
+                @apply .block .py-4;
+                content: '';
+                display: block;
+                background-image: url('../img/site-elements/pixville-detail.svg');
+                background-repeat: no-repeat;
+                background-size: 40px;
+                background-position: center center;
+                width: 100%;
+                height: 64px;
+            }
+        }
+
+        &.vbc {
+            h1 {
+                @apply .bg-white .font-bold .tracking-wide .px-4 .text-black;
+            }
+            h5 {
+                @apply .bg-black .px-4 .text-white;
+
+                &::after {
+                    @apply .hidden;
+                }
+            }
+        }
+
+    }
+
+    &-top {
+        @apply .py-6 .text-center .w-full;
+
+        h6 {
+           &::after {
+               @apply .block .py-2;
+               content: '';
+               display: block;
+               background-image: url('../img/site-elements/pixville-single-block.svg');
+               background-repeat: no-repeat;
+               background-size: 10px;
+               background-position: center center;
+               width: 100%;
+               height: 6px;
+           }
+        }
+    }
+
+    &-content {
+        @apply .mb-8 .w-full;
+
+        @media (min-width: 768px) {
+            @apply .mb-80;
+        }
+
+        h3, h6 {
+            @apply .text-black;
+        }
+
+        h3 {
+            @apply .text-3xl .tracking-wide;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        h6 {
+           &::after {
+               @apply .block .py-4;
+               content: '';
+               display: block;
+               background-image: url('../img/site-elements/pixville-single-block.svg');
+               background-repeat: no-repeat;
+               background-size: 16px;
+               background-position: center center;
+               width: 100%;
+               height: 12px;
+           }
+        }
+    }
+
+    &-project {
+        h5 {
+            @apply .font-secondary .tracking-wide .uppercase;
+        }
+    }
+
+    &-blog {
+        h2, h3 {
+            @apply .font-secondary .text-black .text-left .text-lg .tracking-wide .uppercase;
+
+            &::after {
+                @apply .block .my-6 .bg-black;
+                content: '';
+                width: 24px;
+                height: 1px;
+            }
+        }
+
+    }
+
+}
+
+.plain {
+
+    .title-text {
+        @apply .mt-96 .mx-1 .w-full;
+        max-width: 1200px;
+
+        @media (min-width: 768px) {
+            @apply .mt-0 .mx-auto .px-3;
+        }
+    }
+
+    h1 {
+        @apply .tracking-normal .text-left;
+
+        &::after {
+            @apply .block .my-6 .bg-black;
+            content: '';
+            width: 24px;
+            height: 1px;
+        }
+    }
+}

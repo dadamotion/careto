@@ -1,0 +1,58 @@
+{%- minify -%}
+
+{% if block.image|length %}
+
+{% set image = block.image[0] %}
+
+{% if image %}
+  {% set optimizedImage = block.image[0].optimizedImages %}
+
+  
+
+    <div class="block {{ block.textOnImage ? 'relative' : ''}}">
+
+      <picture class="block w-full">
+        <img  src="{{ optimizedImage.src() }}"
+              data-srcset="{{ optimizedImage.srcset() }}"
+              data-sizes="100vw"
+              alt="{{ block.image[0].title }}" />
+      </picture>
+
+      {% if block.textOnImage|length %}
+
+        {% switch block.position %}
+
+          {% case 'left' %}
+            {% set classes = "justify-start items-start p-" ~ block.spacing %}
+          {% case 'right' %}
+            {% set classes = "justify-start items-start p-" ~ block.spacing %}
+          {% case 'center' %}
+            {% set classes = "justify-center items-center p-" ~ block.spacing %}
+          {% case 'drop-left' %}
+            {% set classes = "justify-end items-end p-" ~ block.spacing %}
+          {% case 'drop-right' %}
+            {% set classes = "justify-end items-end p-" ~ block.spacing %}
+
+
+        {% endswitch %}
+
+        <div class="absolute bg-black-10 flex pin-t pin-l w-full h-full {{ classes }}">
+          <h3 class="inline bg-white-80 px-4 py-2 text-2xl md:text-3xl lg:text-5xl text-black tracking-wide uppercase">
+            {{ block.textOnImage }}
+          </h3>
+        </div>
+      {% endif %}
+
+    </div>
+
+    {% if block.caption|length %}
+      <span class="inline-block pl-8 py-4 italic text-grey text-sm">
+        {{ block.caption }}
+      </span>
+    {% endif %}
+  
+{% endif %}
+
+{% endif %}
+
+{%- endminify -%}

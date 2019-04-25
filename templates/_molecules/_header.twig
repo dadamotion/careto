@@ -1,0 +1,162 @@
+{%- cache globally using key "mainmenu" -%}
+<header class="bg-black-30 fixed flex justify-between h-20 py-4 px-4 lg:px-16 border-b border-white-30 w-full z-50">
+
+  {%- minify -%}
+  <div class="flex items-center h-full">
+    <a href="{{ baseUrl }}" class="inline-block border-0 h-6 lg:h-8">
+      {% if branding.logo|length %}
+        <picture class="h-6 lg:h-8">
+          <img src="{{ branding.logo.one().url }}" alt="careto" class="h-full">
+        </picture>
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="a-hamburger lg:hidden" @click="toggleMenu()">
+
+    <span class="a-hamburger--label">Menu</span>
+
+    <div class="a-hamburger--icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+  {%- endminify -%}
+
+  <div :class="['m-menu', { 'is-open': menuOpen }]">
+
+    {%- minify -%}
+    <div class="m-menu--close lg:hidden" @click="toggleMenu()">
+      <div class="m-menu--close__icon">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    {%- endminify -%}
+    
+    <div class="lg:h-full">
+      {%- minify -%}
+      <h3 class="font-bold font-primary mt-8 mb-4 text-base text-grey tracking-wide uppercase lg:hidden">
+        {{- "Therapiën"|t -}}
+      </h3>
+      
+      {% nav page in pages.all() %}
+
+      <div class="m-menu--item m-menu--item__main" @mouseover="toggleDropdown({{ page.id }})" @mouseleave="resetDropdown()">
+    
+        <a href="{{ page.getUrl }}" title="{{ page.title }}" :class="['m-menu--link m-menu--link__main', { 'is-open': showDropdown({{ page.id }}) }]">
+          <span>
+            {{- page.title -}}
+          </span>
+          {% if page.hasDescendants %}
+          <span class="m-menu--dropdown__icon lg:hidden" @click.self.prevent="toggleDropdown({{ page.id }})">
+            〉
+          </span>
+          {% endif %}
+        </a>
+        {% if page.hasDescendants %}
+          <ul :class="['m-dropdown--menu', { 'is-open': showDropdown({{ page.id }}) }]">
+            {% set childPages = page.getChildren() %}
+            {% for childPage in childPages.all() %}
+              <li class="m-menu--item ml-0">
+                <a href="{{ childPage.getUrl }}" title="{{ childPage.title }}" class="m-menu--link" @mouseover="prerenderLink">
+                  <span class="m-menu--label">
+                    {{- childPage.title -}}
+                  </span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+      </div>
+    
+      {% endnav %}
+      {%- endminify -%}
+
+      {%- minify -%}
+      <div class="m-menu--item m-menu--item__main" @mouseover="toggleDropdown(100)" @mouseleave="resetDropdown()">
+
+        <h3 class="font-bold font-primary mt-8 mb-4 text-base text-grey tracking-wide uppercase lg:hidden">
+          {{- "Andere"|t -}}
+        </h3>
+
+        <a title="{{ businessInfo.businessName }}" :class="['m-menu--link m-menu--link__main', { 'is-open': showDropdown(100) }]" @click.self.prevent="toggleDropdown(100)">
+          <span class="m-menu--label">
+            {{- businessInfo.businessName -}}
+          </span>
+          <span class="m-menu--dropdown__icon lg:hidden">
+            〉
+          </span>
+        </a>
+
+        <ul :class="['m-dropdown--menu', { 'is-open': showDropdown(100) }]">
+              <li class="m-menu--item ml-0">
+                <a href="{{ url('therapeuten') }}" title="{{ "Blog"|t }}" class="m-menu--link" @mouseover="prerenderLink">
+                  <span>
+                    {{ "Therapeuten"|t }}
+                  </span>
+                </a>
+              </li>
+              <li class="m-menu--item ml-0">
+                <a href="{{ url('blog') }}" title="{{ "Blog"|t }}" class="m-menu--link" @mouseover="prerenderLink">
+                  <span class="m-menu--label">
+                    {{ "Blog"|t }}
+                  </span>
+                </a>
+              </li>
+              <li class="m-menu--item ml-0">
+                <a href="{{ url('contact') }}" title="{{ "Contact"|t }}" class="m-menu--link" @mouseover="prerenderLink">
+                  <span class="m-menu--label">
+                    {{- "Contact"|t -}}
+                  </span>
+                </a>
+              </li>
+          </ul>
+
+      </div>
+      {%- endminify -%}
+
+    </div>
+
+    {%- minify -%}
+    <div class="my-8 lg:ml-8 lg:my-0">
+      <a href="{{ url('contact') }}" class="border border-white inline-block px-4 py-2 font-bold font-primary text-sm tracking-wide text-white hover:text-black hover:bg-white no-underline uppercase w-full md:w-auto">
+        <span class="">
+          {{- "Afspraak maken" | t -}}
+        </span>
+      </a>
+    </div>
+
+    <!-- SOCIALS -->
+    <div class="my-4 lg:ml-8 lg:my-0">
+      <h3 class="font-bold font-primary mt-8 mb-4 text-base text-grey tracking-wide uppercase lg:hidden">
+        {{- "Social Media"|t -}}
+      </h3>
+      {% for block in socialMedia.socialMedia.all() %}
+
+          {% switch block.socialMediaName.value %}
+              {% case "facebook" %}
+                  {% set shortName = "Fb" %}
+              {% case "twitter" %}
+                  {% set shortName = "Tw" %}
+              {% case "linkedin" %}
+                  {% set shortName = "Ln" %}
+              {% case "instagram" %}
+                  {% set shortName = "Ig" %}
+          {% endswitch %}
+
+      <a class="e-share-icons--link" href="{{ block.socialMediaUrl }}" target="_blank">
+          <span class="hover-effect">
+              {{- shortName -}}
+          </span>
+      </a>
+      {% endfor %}
+    </div>
+    {%- endminify -%}
+
+  </div>
+</header>
+{%- endcache -%}

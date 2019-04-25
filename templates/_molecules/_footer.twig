@@ -1,0 +1,131 @@
+<footer class="bg-black">
+
+  <div class="container mx-auto px-4 pt-12">
+
+    <div class="block md:flex mb-8">
+
+      <div class="mb-8 md:mb-0 md:px-8 md:w-1/4">
+        <div class="flex-none self-center md:pr-16">
+          <a href="{{ baseUrl }}" class="inline-block border-0 h-8">
+            <picture class="h-8">
+              <img src="{{ branding.logo.one().url }}" alt="careto" class="h-full">
+            </picture>
+          </a>
+        </div>
+      </div>
+
+      <div class="md:flex md:flex-wrap md:w-3/4 xl:flex-no-wrap xl:justify-between">
+
+        <div class="mb-8 md:mb-0 md:px-8 md:flex-shrink md:ml-auto">
+          <h4 class="font-semibold font-primary text-lg text-white tracking-wide uppercase mb-4">
+            Careto
+          </h4>
+          <ul class="list-reset text-grey-dark text-sm">
+            <li class="mb-2">
+              <a href="{{ url('blog') }}" title="Blog" class="inline-block font-primary text-sm tracking-wide text-white hover:text-red no-underline uppercase">
+                <span>
+                  Blog
+                </span>
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="{{ url('therapeuten') }}" title="Therapeuten" class="inline-block font-primary text-sm tracking-wide text-white hover:text-red no-underline uppercase">
+                <span>
+                  Therapeuten
+                </span>
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="{{ url('contact') }}" title="Therapeuten" class="inline-block font-primary text-sm tracking-wide text-white hover:text-red no-underline uppercase">
+                <span>
+                  Contact
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mb-8 md:mb-0 md:px-8 md:flex-shrink">
+          <h4 class="font-semibold font-primary text-lg text-white tracking-wide uppercase mb-4">
+            Therapiën
+          </h4>
+          <ul class="list-reset text-grey-dark text-sm">
+            {% nav page in pages.all() %}
+            <li class="mb-2">
+              <a href="{{ page.getUrl }}" title="{{ page.title }}" class="inline-block font-primary text-sm tracking-wide text-white hover:text-red no-underline uppercase">
+                <span>
+                  {{ page.title }}
+                </span>
+              </a>
+            </li>
+            {% endnav %}
+          </ul>
+        </div>
+
+        <div class="mb-8 md:mb-0 md:px-8 md:flex-shrink">
+          <h4 class="font-semibold font-primary text-lg text-white tracking-wide uppercase mb-4">
+            Contacteer CareTo
+          </h4>
+          <ul class="list-reset">
+            <li class="mb-0">
+              <a href="tel:{{ businessInfo.phone.international | replace(' ','') | trim }}" class="text-white hover:text-red no-underline">
+                <span class="font-bold inline-block mr-2 text-sm">T</span> 
+                <span class="text-sm">{{ businessInfo.phone.international }}</span>
+              </a>
+            </li>
+            <li class="mb-4">
+              <a href="mailto:{{ businessInfo.email | replace(' ','') | trim }}" class="text-white hover:text-red no-underline">
+                <span class="font-bold inline-block mr-2 text-sm">E</span>
+                <span class="text-sm">{{ businessInfo.email }}</span>
+              </a>
+            </li>
+            <li class="mb-1">
+              <span class="font-bold text-white text-sm uppercase">
+                {{ "Adres" | t }}
+              </span>
+            </li>
+            <li class="mb-0">
+              <span class="text-sm">
+                {{ businessInfo.address.address1 }}
+              </span>
+            </li>
+            <li class="mb-2">
+              <span class="text-sm">
+                {{ businessInfo.address.postalCode }} {{ businessInfo.address.locality }}
+              </span>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <div class="border-t border-white-30 text-center md:text-left md:flex py-8 mt-4 lg:mt-12">
+      <div class="md:flex md:flex-grow self-center text-sm text-white">
+
+        <div class="pt-2 md:inline-block font-bold">
+          &copy; {{ now|date("Y") }} CareTo 
+        </div>
+
+        <div class="text-sm md:flex md:inline-flex md:flex-no-wrap mt-4 md:mt-0 md:ml-auto">
+          <ul class="list-rest md:inline-block mt-2 md:mt-0 md:mr-4 pl-0">
+            <li class="block md:inline-block align-middle mb-2 md:mb-0 mr-4">
+              <a href="{{ url('privacy-policy') }}" class="inline-block font-primary text-xs tracking-wide text-white hover:text-red no-underline">
+                Privacy Policy
+              </a>
+            </li>
+            <li class="block md:inline-block align-middle mb-2 md:mb-0 mr-4">
+              <a href="{{ url('algemene-voorwaarden') }}" class="inline-block font-primary text-xs tracking-wide text-white hover:text-red no-underline">
+                Algemene voorwaarden
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>  
+    </div>
+
+  </div>
+
+</footer>

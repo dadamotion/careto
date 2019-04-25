@@ -1,0 +1,58 @@
+<div class="md:flex flex-wrap w-full">
+{% for row in block.services.all() %}
+  
+  {% set optimizedImage = row.image.one().optimizedOverview %}
+
+  <div class="w-full md:w-1/2 lg:w-1/4">
+
+    {% if row.hyperlink|length %}
+    <a href="{{ row.hyperlink.getUrl() }}" title="{{ row.hyperlink.getText }}">
+    {% endif %}
+
+      
+        <div class="m-services block relative overflow-hidden">
+
+        <picture class="m-services--image block w-full">
+          <img  src="{{ optimizedImage.src() }}"
+                data-srcset="{{ optimizedImage.srcset() }}"
+                data-sizes="100vw"
+                alt="{{ row.image.one().title }}" />
+        </picture>
+
+          {% if row.text|length %}
+
+            {% switch block.position %}
+
+              {% case 'left' %}
+                {% set classes = "justify-start items-start p-" ~ block.spacing %}
+              {% case 'right' %}
+                {% set classes = "justify-start items-start p-" ~ block.spacing %}
+              {% case 'center' %}
+                {% set classes = "justify-center items-center p-" ~ block.spacing %}
+              {% case 'drop-left' %}
+                {% set classes = "justify-end items-end p-" ~ block.spacing %}
+              {% case 'drop-right' %}
+                {% set classes = "justify-end items-end p-" ~ block.spacing %}
+
+
+            {% endswitch %}
+
+            <div class="absolute bg-black-10 flex pin-t pin-l w-full h-full {{ classes }}">
+              <h4 class="font-bold font-primary inline bg-black-80 px-4 py-2 text-base text-center text-white tracking-wide uppercase">
+                {{ row.text }}
+              </h4>
+            </div>
+
+          {% endif %}
+
+        </div>
+      
+
+    {% if row.hyperlink|length %}
+    </a>
+    {% endif %}
+
+  </div>
+
+{% endfor %}
+</div>

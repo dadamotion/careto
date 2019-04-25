@@ -1,0 +1,15 @@
+.m-services {
+  $m: &;
+  
+  &--image {
+    transition: transform 800ms ease-in-out;
+  }
+
+  &:hover {
+    #{$m} {
+      &--image {
+        transform: scale(1.2);
+      }
+    }
+  }
+}

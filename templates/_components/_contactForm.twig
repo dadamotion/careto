@@ -1,0 +1,84 @@
+{% macro errorList(errors) %}
+    {% if errors %}
+        <ul class="errors">
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{% from _self import errorList %}
+
+        <div class="row success" v-if="mailSuccess">
+
+            <div class="notification success">
+                <span class="icon"><i class="fas fa-comment-check"></i></span> {{"Bedankt! Je mail is succesvol verzonden, wij contacteren je zo spoedig mogelijk."|t}}
+            </div>
+
+        </div>
+
+        <div class="row error" v-if="mailError">
+
+            <div class="notification error">
+                <span class="icon"><i class="fas fa-comment-times"></i></span> {{"Oops! Er heeft zich een probleem voorgedaan, gelieve opnieuw te proberen."|t}} {# craft.app.session.getFlash('error') #}
+            </div>
+
+        </div>
+
+        <form
+            class="w-full"
+            method="post"
+            action=""
+            enctype="multipart/form-data"
+            accept-charset="UTF-8"
+            ref="contact"
+            @submit.prevent="submitHandler"
+        >
+            {{ csrfInput() }}
+            <input type="hidden" name="action" value="contact-form/send">
+
+            <div class="md:flex md:flex-wrap w-full -mx-4">
+                <div class="w-full md:w-1/2 px-4">
+                    <div class="form-field">
+                        <label for="from-name" class="label">{{"Naam"|t}}</label>
+                        <input class="input" id="from-name" ref="fromName" name="fromName" type="text" placeholder="naam" required>
+                        {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="from-email" class="label">{{"E-mailadres"|t}}</label>
+                        <input class="input" id="from-email" ref="fromEmail" name="fromEmail" type="email" placeholder="e-mailadres" required>
+                        {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 px-4">
+
+                    <div class="form-field">
+                        <label for="phone" class="label">{{"Telefoon"|t}}</label>
+                        <input class="input" id="phone" ref="phone" name="message[Phone]" type="text" placeholder="telefoon" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="company" class="label">{{"Bedrijf"|t}}</label>
+                        <input class="input" id="company" ref="company" name="message[Company]" type="text" placeholder="bedrijf">
+                    </div>
+
+                </div>
+
+                <div class="w-full px-4">
+                    <div class="form-field">
+                        <textarea id="message" ref="body" name="message[body]" placeholder="bericht"></textarea>
+                        {{ message is defined and message ? errorList(message.getErrors('message')) }}
+                    </div>
+                </div>
+
+                <div class="w-full mb">
+                    <div class="button-wrap right">
+                        <button class="button" type="submit">{{"Stuur je bericht"|t}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>

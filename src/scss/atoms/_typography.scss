@@ -1,0 +1,139 @@
+.a-typography {
+
+  h2, h2, h3, h4, h5, h6, p, li {
+    word-wrap: normal;
+  }
+
+  &.inherit {
+    p {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+  }
+
+  h2, h3, h4, h5, h6 {
+    @apply mb-4 font-secondary text-black tracking-wide;
+  }
+
+  h2, h3 {
+    @apply font-extrabold;
+  }
+
+  h4, h5, h6 {
+    @apply font-bold font-primary uppercase;
+  }
+
+  h2 {
+    @apply text-4xl;
+  }
+
+  h3 {
+    @apply text-3xl;
+  }
+
+  h4 {
+    @apply text-2xl;
+  }
+
+  h5 {
+    @apply text-xl;
+  }
+
+  h6 {
+    @apply font-bold text-lg text-grey-darkest uppercase;
+  }
+
+  p {
+    @apply font-light font-primary leading-normal text-black text-lg;
+
+    strong {
+      @apply font-bold;
+    }
+
+    em {
+      @apply italic;
+    }
+
+    & > span {
+      font-size: inherit;
+      color: inherit;
+      font-family: inherit;
+      text-align: inherit;
+    }
+  }
+
+  ul, ol {
+    @apply font-light mb-8 text-black;
+
+    li {
+      @apply mb-2;
+    }
+  }
+
+  a {
+    @apply text-red;
+    transition: color 375ms ease-in-out;
+
+    &:active,
+    &:hover,
+    &:focus {
+      @apply text-black;
+    }
+
+  }
+
+  blockquote {
+    p {
+      font-size: inherit;
+      color: inherit;
+      font-family: inherit;
+      text-align: inherit;
+    }
+
+    footer {
+      @apply inline;
+      color: inherit;
+
+      span {
+        color: inherit;
+      }
+    }
+
+    &.text-lg {
+      span {
+        @apply text-base;
+
+        &.numbers {
+          font-size: inherit;
+        }
+      }
+    }
+
+    &.text-xl {
+      span {
+        @apply text-lg;
+
+        &.numbers {
+          font-size: inherit;
+        }
+      }
+    }
+
+    &.text-2xl, &.text-3xl, &.text-4xl, &.text-5xl {
+      span {
+        @apply text-xl;
+
+        &.numbers, &.caps {
+          font-size: inherit;
+        }
+      }
+    }
+  }
+
+  &.text-black,
+  &.text-white {
+    p {
+      color: inherit;
+    }
+  }
+}

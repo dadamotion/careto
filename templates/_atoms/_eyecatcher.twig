@@ -1,0 +1,65 @@
+{% switch block.position %}
+  {% case "left" %}
+    {% set positionClasses = "justify-start text-center lg:text-left" %}
+    {% set orderButtonClasses = "order-2" %}
+    {% set orderTextClasses = "order-1" %}
+  {% case "center" %}
+    {% set positionClasses = "justify-center text-center lg:text-left lg:text-center" %}
+    {% set orderButtonClasses = "order-2" %}
+    {% set orderTextClasses = "order-1" %}
+  {% case "right" %}
+    {% set positionClasses = "justify-end text-center lg:text-left lg:text-right" %}
+    {% set orderButtonClasses = "order-1" %}
+    {% set orderTextClasses = "order-2" %}
+  {% default %}
+    {% set positionClasses = "justify-start text-center lg:text-left" %}
+    {% set orderButtonClasses = "order-2" %}
+    {% set orderTextClasses = "order-1" %}
+{% endswitch %}
+
+{% switch block.background %}
+  {% case "white" %}
+    {% set backgroundClasses = "bg-black" %}
+    {% set fontClasses = "text-black" %}
+    {% set buttonClasses = "bg-transparent text-black hover:text-white hover:bg-black border-black" %}
+  {% case "black" %}
+    {% set backgroundClasses = "bg-white" %}
+    {% set fontClasses = "text-white" %}
+    {% set buttonClasses = "bg-transparent text-white hover:text-black hover:bg-white border-white" %}
+  {% case "gradient" %}
+    {% set backgroundClasses = "bg-gradient" %}
+    {% set fontClasses = "text-white" %}
+    {% set buttonClasses = "bg-transparent text-white hover:text-black hover:bg-white border-white" %}
+{% endswitch %}
+
+{%- minify -%}
+<div class="bg-{{ block.background }} w-full">
+
+  <div class="container md:flex {{ positionClasses }} mx-auto py-{{ block.spacing }} px-8 lg:px-0 py-{{ block.offset }}">
+
+    <div class="a-typography {{ orderTextClasses }}">
+
+      <blockquote class="{{ fontClasses }} text-3xl lg:text-5xl font-primary max-w-lg px-8 tracking-wide">
+
+        {{ block.text|typogrify|smartypants }}
+
+      </blockquote>
+
+    </div>
+
+    {% if block.button|length %}
+      <div class="flex flex-grow justify-center lg:justify-start items-center {{ orderButtonClasses }}">
+        <a  class="bg-transparent border font-bold font-primary inline-block mt-8 px-8 py-4 no-underline tracking-wider uppercase {{ buttonClasses }}"
+            href="{{ block.button.getUrl() }}">
+          
+          <span>
+            {{ block.button.getText() }}
+          </span>
+        </a>
+      </div>
+    {% endif %}
+    
+  </div>
+
+</div>
+{%- endminify -%}

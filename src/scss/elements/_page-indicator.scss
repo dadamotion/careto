@@ -1,0 +1,31 @@
+.page-indicator {
+list-style: none;
+margin: -100px 0 0 0;
+padding: 0;
+display: block;
+overflow: hidden;
+height: auto;
+position: fixed;
+right: 70px;
+top: 50%;
+z-index: 380; }
+.page-indicator li {
+  list-style: none;
+  margin: 2px 0 3px 0;
+  padding: 0;
+  display: block;
+  clear: left;
+  width: 2px;
+  height: 30px;
+  background: rgba(182, 188, 206, 0.7);
+  position: relative;
+  overflow: hidden; }
+  .page-indicator li .bar {
+    height: 60px;
+    width: 2px;
+    background: #FFFFFF;
+    -webkit-transform: scaleY(0);
+            transform: scaleY(0); }
+@media screen and (max-width: 800px) {
+    .page-indicator {
+    display: none; } }

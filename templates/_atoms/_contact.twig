@@ -1,0 +1,13 @@
+{%- minify -%}
+  <div class="py-{{ block.offset }}">
+
+    <h2 class="text-black text-{{ block.position }} mb-8">{{ block.heading }}</h2>
+
+    <div class="a-typography text-{{ block.position }} text-{{ block.textSize }} px-{{ block.textOffset }}">
+      {{ block.description }}
+    </div>
+
+    {% include '_components/_contactForm' %}
+
+  </div>
+{%- endminify -%}

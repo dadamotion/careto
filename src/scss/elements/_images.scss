@@ -1,0 +1,15 @@
+.e-image {
+  &--background {
+    @apply absolute pin-t pin-l w-screen h-screen z-neg;
+
+    & > picture {
+      @apply w-full h-full;
+
+      & > img {
+        @apply absolute w-screen h-screen;
+        object-fit: cover;
+        pointer-events: none;
+      }
+    }
+  }
+}

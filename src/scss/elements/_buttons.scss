@@ -1,0 +1,25 @@
+.button {
+    @apply bg-transparent border border-black border-solid font-primary no-underline px-8 text-center text-sm tracking-wide uppercase w-full;
+    height: 56px;
+    line-height: 54px;
+    transition: background-color 500ms ease-in-out,
+                color 500ms ease-in-out;
+
+    &:hover {
+        @apply bg-black text-white;
+    }
+
+    &:active,
+    &:focus {
+        outline: none;
+    }
+
+    &-wrap {
+        @apply .flex .justify-center .mx-auto .pt-8 .w-full;
+        max-width: 256px;
+
+        @media (min-width: 768px) {
+            @apply pt-8;
+        }
+    }
+}

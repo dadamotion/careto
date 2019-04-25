@@ -1,0 +1,84 @@
+.navigation {
+    &-wrapper {
+        @apply .bg-white .fixed .h-full .overflow-y-auto .p-0 .pin-l .pin-t .w-full;
+        transform: translateY(-100%) translateZ(0);
+        transition: transform .3s ease;
+        z-index: 9999;
+
+        @media (min-width: 768px) {
+            @apply .p-8;
+        }
+
+        &.is-open {
+            transform: translateY(0) translateZ(0);
+        }
+    }
+
+    &-main {
+        @apply .flex .flex-col .flex-no-wrap .relative;
+        min-height: 530px;
+
+        @media (min-width: 768px) {
+            @apply .h-full;
+            max-height: 100%;
+        }
+    }
+
+    &-image {
+        @apply .absolute .pin-t .pin-r .pin-b .pin-l .z-neg;
+    }
+
+    &-background {
+        @apply .block .h-full .overflow-hidden .relative .w-full;
+
+        img {
+            @apply .w-full;
+            object-fit: cover;
+        }
+    }
+
+    &-items {
+        @apply flex flex-col;
+
+
+        @media (min-width: 768px) {
+            @apply .flex-no-wrap;
+            height: 20%;
+        }
+    }
+
+    &-item {
+        @media (min-width: 768px) {
+            @apply h-full;
+        }
+
+        a {
+            @apply flex font-primary items-center justify-center no-underline px-4 py-8 text-base text-black tracking-wide uppercase w-full;
+            transition: background-color .3s ease,
+                        color .3s ease;
+
+            &:hover {
+                @apply bg-black text-white;
+            }
+        }
+
+    }
+
+    &-close {
+        @apply absolute flex items-center z-30;
+        cursor: pointer;
+        height: 21px;
+        right: 1rem;
+        top: 1rem;
+
+        @media (min-width: 768px) {
+            right: 2rem;
+            top: 2rem;
+        }
+
+        span {
+            @apply inline-flex font-primary text-sm text-black uppercase;
+            letter-spacing: 4px;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+.e-main-cta {
+  $e: &;
+
+  @apply inline-block fixed text-left;
+  right: 16.66667%;
+  top: 6.66667%;
+  z-index: 335;
+  transition: right 200ms ease-in-out;
+
+  &--link {
+      @apply bg-transparent border-2 border-white flex font-bold px-4 py-2 no-underline text-sm text-white uppercase;
+
+      &:hover,
+      &:active,
+      &:focus {
+        @apply bg-white text-black;
+        transition: all 275ms ease-in-out;
+      }
+  }
+
+  &__black {
+      #{$e}--link {
+          @apply text-black;
+      }
+  }
+}

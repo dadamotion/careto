@@ -1,0 +1,62 @@
+.hero {
+    &-section {
+        @apply .flex .items-center .relative .w-full;
+        overflow-y: hidden;
+        min-height: 100vh;
+        max-height: 100vh;
+
+        @media (min-width: 768px) {
+            min-height: 760px;
+            max-height: 760px;
+        }
+
+
+        &.projects {
+            @apply .overflow-hidden;
+            min-height: 640px;
+            max-height: 640px;
+        }
+
+        &.plain {
+            @apply .bg-black;
+            min-height: 450px;
+
+            @media (min-width: 768px) {
+                max-height: 450px;
+            }
+        }
+    }
+
+    &-content {
+        @apply .flex .justify-center .w-full;
+    }
+
+    &-image, &-video {
+        @apply .absolute .pin-t .pin-r .pin-b .pin-l .z-neg;
+    }
+
+    &-video {
+        &-player {
+            @apply .block .min-h-full .min-w-full;
+            opacity: 1;
+            height: auto;
+            width: auto;
+            object-fit: fill;
+
+            &.fullscreen {
+                @apply .absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate3d(-50%,-50%,0);
+            }
+        }
+    }
+
+    &-background {
+        @apply .block .h-full .overflow-hidden .relative .w-full;
+    }
+
+    &-categories {
+
+    }
+}

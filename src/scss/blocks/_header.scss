@@ -1,0 +1,21 @@
+.header {
+    @apply .absolute .pin-t .pin-l .pin-r .z-100;
+
+    & > .navbar {
+        @apply .flex .justify-between .items-center .px-6 .mt-8;
+    }
+}
+
+.logo {
+    &-main {
+        height: 20px;
+
+        @media (min-width: 768px) {
+            height: 30px;
+        }
+
+        a, img {
+            @apply .block .h-full;
+        }
+    }
+}
